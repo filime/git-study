@@ -1,4 +1,4 @@
-name: Save Output Results
+name: save
 
 on:
   push:
