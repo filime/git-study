@@ -15,7 +15,6 @@ jobs:
 
     - run: mkdir -p path/to/artifact
 
-    - run: echo hello > path/to/artifact/world.txt
 
     - uses: actions/upload-artifact@v3
       with:
@@ -27,4 +26,4 @@ jobs:
       with:
           python-version: ${{ matrix.python-version }}
     - name: Display Python version
-      run: python -c "import sys; print(sys.version)"
+      run: python -c "import sys; print(sys.version)" > ${python --version}.txt
