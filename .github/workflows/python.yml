@@ -1,0 +1,35 @@
+name: Save Output Results
+
+on: [push]
+
+jobs:
+  save-results:
+    name: Save Output Results
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        python-version: [3.8, 3.9, 3.10]
+
+    steps:
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run tests and generate output
+        run: python run_tests.py
+
+      - name: Upload Output as Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: Output Results - Python ${{ matrix.python-version }}
+          path: path/to/output/directory
